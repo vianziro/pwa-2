@@ -31,7 +31,7 @@ function saveFavoriteTeam(data) {
                     registration.showNotification(title, options);
                 });
             } else {
-                console.error('FItur notifikasi tidak diijinkan.');
+                console.error('Fitur notifikasi tidak diperbolehkan.');
             }
   }).catch(function(err) {
       console.log(err);
@@ -63,14 +63,14 @@ function deleteFavoriteTeam(data) {
       store.delete(data);
       return tx.complete;
   }).then(function() {
-     var title = `Succes Delete Favorit`;
+     var title = `Succes Hapus Favorit`;
         
       if (Notification.permission === 'granted') {
           navigator.serviceWorker.ready.then(function(registration) {
               registration.showNotification(title);
           });
       } else {
-          console.error('FItur notifikasi tidak diijinkan.');
+          console.error('Fitur notifikasi tidak diperbolehkan.');
       }
   }).catch(function(err) {
       console.log(err);

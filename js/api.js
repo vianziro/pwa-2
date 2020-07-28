@@ -83,14 +83,13 @@ function getTopScore() {
 }
 
 function getTeamsId(teamid) {
-  // let urlParams = new URLSearchParams(window.location.search);
-  // let teamid = urlParams.get("id");
+
   if ('caches' in window) {
     caches.match(url_team + teamid).then(function (response) {
       if (response) {
         response.json().then(function (data) {
           ToTimHtml(data);
-          // console.dir("getKlassemen " + data);
+         
         });
       }
     });
@@ -99,7 +98,6 @@ function getTeamsId(teamid) {
     .then(status)
     .then(json)
     .then(function(data) {
-      // console.log(data) ;
       ToTimHtml(data);
     })
     .catch(error);
@@ -182,7 +180,6 @@ function ToKlassemenHtml(data){
        <span class="card-title">${data.competition.name} ${data.competition.area.name} ${data.standings[0].stage} ${data.competition.id} </span>
     `;
     data.standings[0].table.forEach(function(team) {
-      // console.log(team,team.position);
       klassemenHTML += `
               
                 <td>${team.position}</td>
@@ -215,7 +212,6 @@ function ToKlassemenHtml(data){
 function ToTopScrorerHtml(data){
     var topScorerTML = '';
       data.scorers.forEach(function(player) {
-      // console.log(team,team.position);
       topScorerTML += `
              
                <li class="collection-item">

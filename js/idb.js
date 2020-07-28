@@ -117,7 +117,7 @@
     'delete'
   ]);
 
-  // proxy 'next' methods
+
   ['advance', 'continue', 'continuePrimaryKey'].forEach(function(methodName) {
     if (!(methodName in IDBCursor.prototype)) return;
     Cursor.prototype[methodName] = function() {
@@ -145,33 +145,6 @@
     return new Index(this._store.index.apply(this._store, arguments));
   };
 
-  proxyProperties(ObjectStore, '_store', [
-    'name',
-    'keyPath',
-    'indexNames',
-    'autoIncrement'
-  ]);
-
-  proxyRequestMethods(ObjectStore, '_store', IDBObjectStore, [
-    'put',
-    'add',
-    'delete',
-    'clear',
-    'get',
-    'getAll',
-    'getKey',
-    'getAllKeys',
-    'count'
-  ]);
-
-  proxyCursorRequestMethods(ObjectStore, '_store', IDBObjectStore, [
-    'openCursor',
-    'openKeyCursor'
-  ]);
-
-  proxyMethods(ObjectStore, '_store', IDBObjectStore, [
-    'deleteIndex'
-  ]);
 
   function Transaction(idbTransaction) {
     this._tx = idbTransaction;
@@ -187,6 +160,40 @@
       };
     });
   }
+
+
+
+  proxyRequestMethods(ObjectStore, '_store', IDBObjectStore, [
+    'put',
+    'add',
+    'delete',
+    'clear',
+    'get',
+    'getAll',
+    'getKey',
+    'getAllKeys',
+    'count'
+  ]);
+
+
+  proxyProperties(ObjectStore, '_store', [
+    'name',
+    'keyPath',
+    'indexNames',
+    'autoIncrement'
+  ]);
+
+ 
+  proxyCursorRequestMethods(ObjectStore, '_store', IDBObjectStore, [
+    'openCursor',
+    'openKeyCursor'
+  ]);
+
+  proxyMethods(ObjectStore, '_store', IDBObjectStore, [
+    'deleteIndex'
+  ]);
+
+ 
 
   Transaction.prototype.objectStore = function() {
     return new ObjectStore(this._tx.objectStore.apply(this._tx, arguments));
@@ -240,8 +247,7 @@
     'close'
   ]);
 
-  // Add cursor iterators
-  // TODO: remove this once browsers do the right thing with promises
+ 
   ['openCursor', 'openKeyCursor'].forEach(function(funcName) {
     [ObjectStore, Index].forEach(function(Constructor) {
       // Don't create iterateKeyCursor if openKeyCursor doesn't exist.

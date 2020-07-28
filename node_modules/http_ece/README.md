@@ -1,7 +1,7 @@
 # encrypted-content-encoding
 
 A simple implementation of the [HTTP encrypted
-content-encoding](https://tools.ietf.org/html/draft-nottingham-http-encryption-encoding)
+content-encoding](https://tools.ietf.org/html/rfc8188)
 
 # Use
 
@@ -16,7 +16,7 @@ var parameters = {
 };
 var encrypted = ece.encrypt(data, parameters);
 
-var decrypted = ece.encrypt(encrypted, parameters);
+var decrypted = ece.decrypt(encrypted, parameters);
 
 require('assert').equal(decrypted.compare(data), 0);
 ```

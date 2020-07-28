@@ -16,28 +16,27 @@ let fetchApi = url => {
     }
   });
 }
-//var base_url = "https://readerapi.codepolitan.com/";
-// Blok kode yang akan di panggil jika fetch berhasil
+
 function status(response) {
   if (response.status !== 200) {
     console.log("Error : " + response.status);
-    // Method reject() akan membuat blok catch terpanggil
+
     return Promise.reject(new Error(response.statusText));
   } else {
-    // Mengubah suatu objek menjadi Promise agar bisa "di-then-kan"
+  
     return Promise.resolve(response);
   }
 }
-// Blok kode untuk memparsing json menjadi array JavaScript
+
 function json(response) {
   return response.json();
 }
-// Blok kode untuk meng-handle kesalahan di blok catch
+
 function error(error) {
-  // Parameter error berasal dari Promise.reject()
+ 
   console.log("Error : " + error);
 }
-// Blok kode untuk melakukan request data json
+
 
 function getKlassemen() {
     if ('caches' in window) {
@@ -45,7 +44,7 @@ function getKlassemen() {
       if (response) {
         response.json().then(function (data) {
           ToKlassemenHtml(data);
-          // console.dir("getKlassemen " + data);
+          
         });
       }
     });
@@ -55,7 +54,7 @@ function getKlassemen() {
     .then(status)
     .then(json)
     .then(function(data) {
-      // console.log(data)
+    
       ToKlassemenHtml(data)   
     })
     .catch(error);
@@ -107,15 +106,14 @@ function getTeamsId(teamid) {
 }
 
 function getTeamsIdDetail(teamid) {
-  // let urlParams = new URLSearchParams(window.location.search);
-  // let teamid = urlParams.get("id");
+ 
     return new Promise(function (resolve, reject) {
       if ('caches' in window) {
         caches.match(url_team + teamid).then(function (response) {
           if (response) {
             response.json().then(function (data) {
               resolve(data);
-              // console.dir("getKlassemen " + data);
+            
             });
           }
         });
@@ -124,7 +122,7 @@ function getTeamsIdDetail(teamid) {
         .then(status)
         .then(json)
         .then(function(data) {
-          // console.log(data) ;
+     
           resolve(data);
         })
         .catch(error);
@@ -132,8 +130,7 @@ function getTeamsIdDetail(teamid) {
 }
 
 function getFavoritTeam() {
-  // let urlParams = new URLSearchParams(window.location.search);
-  // let teamid = urlParams.get("id");
+  
   var dataIndexDb = getAllDataFavorit();
   dataIndexDb.then(function (data) {
     

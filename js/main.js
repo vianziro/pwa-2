@@ -6,7 +6,7 @@ var pushSubscription = {
         "auth": "yh1TBM4jnxnDy2T9CIP7PQ=="
     }
 };
-var payload = 'Here is a payload!';
+var payload = 'Here is a pay loading!';
 var options = {
     gcmAPIKey: 'AIzaSyClwQpZU6rn6sLFgU4MIVFI7___50VWsks',
     TTL: 60
